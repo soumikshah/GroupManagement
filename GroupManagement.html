@@ -1,15 +1,19 @@
 <!doctype html>
 <html ng-app="taskmanager">
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script type="text/javascript" src="groupmanagement.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	 <link rel="stylesheet" href="task.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script type="text/javascript" src="groupmanagement.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="task.css">
 </head>
 <body data-ng-controller="TaskManController">
 	<div class="container">
 		<div class="page-header">
-			<h1>Midterm Team Manager <small>CS 454</small></h1>
+			<h1>
+				Midterm Team Manager <small>CS 454</small>
+			</h1>
 		</div>
 
 		<div class="row">
@@ -17,142 +21,160 @@
 				<h3>Add Group</h3>
 				<hr />
 
-				<form ng-submit= "addGroup()">
+				<form ng-submit="addGroup()">
 
 
 					<div class="form-group">
-						<label for="newModuleName">Node Module</label>
-						<input type="text" class="form-control" data-ng-model = "todoModelName" id="newModuleName" placeholder="Enter the module name">
-						<div data-ng-model="groups">
-
-					</div>
+						<label for="newModuleName">Node Module</label> <input type="text"
+							class="form-control" data-ng-model="todoModelName"
+							id="newModuleName" placeholder="Enter the module name">
+						<div data-ng-model="groups"></div>
 
 					</div>
 					<div class="form-group">
 						<label for="newModuleDescription">Description</label>
-						<textarea class="form-control" rows="4" id="newModuleDescription" data-ng-model = "todoModelDescription" placeholder="Enter a description of the node module"></textarea>
+						<textarea class="form-control" rows="4" id="newModuleDescription"
+							data-ng-model="todoModelDescription"
+							placeholder="Enter a description of the node module"></textarea>
 
 					</div>
 					<div class="form-group text-center">
-						<button type="submit" value="add" class="btn btn-primary">Add Group</button>
+						<button type="submit" value="add" class="btn btn-primary">Add
+							Group</button>
 					</div>
-				</div>
-				</form>
+			</div>
+			</form>
 			<div class="col-md-4">
 				<h3>Add Student</h3>
 				<hr />
 				<form ng-submit="addStudent()">
 					<div class="form-group">
-						<label for="newStudentName">Student Name</label>
-						<input type="text" class="form-control" id="newStudentName" data-ng-model="Students" placeholder="Enter the student's name">
+						<label for="newStudentName">Student Name</label> <input
+							type="text" class="form-control" id="newStudentName"
+							data-ng-model="Students" placeholder="Enter the student's name">
 					</div>
-					<div class="form-group" >
-						<label for="targetGroup"  >Group</label>
-						<select ng-init="gname = 'Socket.io'"ng-options="item as item.name for item in groups" data-ng-model="gname"></select>
+					<div class="form-group">
+						<label for="targetGroup">Group</label> <select
+							ng-init="gname = 'Socket.io'"
+							ng-options="item as item.name for item in groups"
+							data-ng-model="gname"></select>
 					</div>
 					<div class="form-group text-center">
-						<button type="submit" value = "addStudent" class="btn btn-primary">Add Student</button>
+						<button type="submit" value="addStudent" class="btn btn-primary">Add
+							Student</button>
 					</div>
 				</form>
 			</div>
 			<div class="col-md-4">
 				<h3>Add Task</h3>
 				<hr />
-				<form ng-submit= "addTask()">
+				<form ng-submit="addTask()">
 					<div data-ng-model="task">
-					<div class="form-group">
-						<label for="newTaskText">Task</label>
-						<input type="text" class="form-control" id="newTaskText" data-ng-model="taskName" placeholder="Enter the task description">
-					</div>
+						<div class="form-group">
+							<label for="newTaskText">Task</label> <input type="text"
+								class="form-control" id="newTaskText" data-ng-model="taskName"
+								placeholder="Enter the task description">
+						</div>
 
-					<div class="form-group">
+						<div class="form-group">
 
-						<label for="targetGroup">Group</label>
-						<select ng-init="taskCtrl = 'Socket.io'"ng-options="item as item.name for item in groups" data-ng-model="taskCtrl"></select>
-						<div data-ng-repeat="tasks in task ">
+							<label for="targetGroup">Group</label> <select
+								ng-init="taskCtrl = 'Socket.io'"
+								ng-options="item as item.name for item in groups"
+								data-ng-model="taskCtrl"></select>
+							<div data-ng-repeat="tasks in task "></div>
+						</div>
 					</div>
-				</div>
-			</div>
 
 					<div class="form-group text-center">
-						<button type="submit" value="add" class="btn btn-primary">Add Task</button>
+						<button type="submit" value="add" class="btn btn-primary">Add
+							Task</button>
 					</div>
 				</form>
 			</div>
 		</div>
 
-		<h3>Groups <small>{{groups.length}} in total</small></h3>
+		<h3>
+			Groups <small>{{groups.length}} in total</small>
+		</h3>
 		<hr />
 
-        <!--
+		<!--
             Note: You should use ng-repeat to generate 'rows' for each of your groups
                   Here, I have included 3 rows, but your HTML should only have 1 (your Angular Template).
         -->
-				<div data-ng-model="groups">
-					<div data-ng-repeat="grou in groups">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="panel-title">{{grou.name}}<a href="" class="btn" data-ng-click="remove(item)"><span class="pull-right glyphicon glyphicon-trash">  </span></a> </div>
-                    </div>
-                    <div class="panel-body">
-                        <h3>description</h3>
-                        <p class="lead">{{grou.description}}</p>
+		<div data-ng-model="groups">
+			<div data-ng-repeat="grou in groups">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="panel-title">
+									{{grou.name}}<a href="" class="btn"
+										data-ng-click="remove(item)"><span
+										class="pull-right glyphicon glyphicon-trash"> </span></a>
+								</div>
+							</div>
+							<div class="panel-body">
+								<h3>description</h3>
+								<p class="lead">{{grou.description}}</p>
 
-                        <!-- .row>.col-md-6*2>h3{Members}+ul.list-unstyled>li{Student $}*4 -->
+								<!-- .row>.col-md-6*2>h3{Members}+ul.list-unstyled>li{Student $}*4 -->
 
-                        <div class="row">
-													<div data-ng-model="stu">
+								<div class="row">
+									<div data-ng-model="stu">
 
-                            <div class="col-md-3">
-                                <h3>Members <small>{{stu.length}} in  Total</small></h3>
-                                <hr />
-																<div data-ng-repeat="stud in stu" >
-                                <ul class="list-unstyled" >
-																	<li >
-																		{{stud.studentname}}
-																		<a href="" class="btn" data-ng-click="removeStudent(item)"><span class="pull-right glyphicon glyphicon-trash">  </span></a>
-																	</li>
-                                </ul>
-                            </div>
-													</div>
-													</div>
+										<div class="col-md-3">
+											<h3>
+												Members <small>{{stu.length}} in Total</small>
+											</h3>
+											<hr />
+											<div data-ng-repeat="stud in stu">
+												<ul class="list-unstyled">
+													<li>{{stud.studentname}} <a href="" class="btn"
+														data-ng-click="removeStudent(item)"><span
+															class="pull-right glyphicon glyphicon-trash"> </span></a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 
-                            <div class="col-md-8">
-																<div data-ng-model="task">
+									<div class="col-md-8">
+										<div data-ng-model="task">
 
-                                <h3>Tasks <small><span>{{completed()}} of {{task.length}} completed</span> &&  <span> {{remaining()}} of {{task.length}} remaining still. <h3> There are total of {{task.length}} tasks</h3></small> </h3>
+											<h3>
+												Tasks <small><span>{{completed()}} of
+														{{task.length}} completed</span> && <span> {{remaining()}}
+														of {{task.length}} remaining still.
+														<h3>There are total of {{task.length}} tasks</h3></small>
+											</h3>
 
-                                <hr />
-                                <!--
+											<hr />
+											<!--
                                 ul.list-unstyled>li*5>select>option{Student $}*4^{ }label>input[type=checkbox]{ }+lorem10
                                 -->
-																	<div data-ng-repeat="ta in task">
-                                <ul class="list-unstyled">
-                                    <li >
-
-																			<select data-ng-init="taskCtrlStu = 'Bhaumik'" data-ng-options="item as item.studentname for item in stu" data-ng-model="taskCtrlStu"></select>
-
-																			  <input type="checkbox" ng-model="ta.done">
-																				<span class="done-{{ta.done}}">{{ta.tas}}</span>
-
-																				<a href="" class="btn" data-ng-click="removeTask(item)"><span class="pull-right glyphicon glyphicon-trash">  </span></a>
-                                    </li>
-                                </ul>
+											<div data-ng-repeat="ta in task">
+												<ul class="list-unstyled">
+													<li><select data-ng-init="taskCtrlStu = 'Bhaumik'"
+														data-ng-options="item as item.studentname for item in stu"
+														data-ng-model="taskCtrlStu"></select> <input
+														type="checkbox" ng-model="ta.done"> <span
+														class="done-{{ta.done}}">{{ta.tas}}</span> <a href=""
+														class="btn" data-ng-click="removeTask(item)"><span
+															class="pull-right glyphicon glyphicon-trash"> </span></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
 								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+							</div>
+						</div>
+					</div>
 				</div>
-				</div>
-            </div>
-        </div>
+			</div>
 
 
-	</div>
-
-
+		</div>
 </body>
 </html>
